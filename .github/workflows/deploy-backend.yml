@@ -35,4 +35,3 @@ jobs:
           args: deploy --only functions:api
         env:
           FIREBASE_TOKEN:  ${{  secrets.FIREBASE_TOKEN  }}
-          PROJECT_ID: fimlmdonaciones
