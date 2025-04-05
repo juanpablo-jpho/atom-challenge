@@ -4,6 +4,7 @@ functions/node_modules/
 
 # Angular build output
 www/
+www/browser/
 .angular/
 
 # Firebase Functions compiled output
