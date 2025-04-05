@@ -1,0 +1,35 @@
+name: Deploy Backend (Firebase Functions)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Functions to Firebase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install functions dependencies
+        working-directory: functions
+        run: npm install
+
+      - name: Build functions (NestJS)
+        working-directory: functions
+        run: npm run build
+
+      - name: Deploy Firebase Functions
+        uses: w9jds/firebase-action@v13.1.0
+        with:
+          args: deploy --only functions:api
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
