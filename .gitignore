@@ -3,7 +3,7 @@ node_modules/
 functions/node_modules/
 
 # Angular build output
-dist/
+www/
 .angular/
 
 # Firebase Functions compiled output
