@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     MatCheckboxModule, 
     MatIconModule, 
     MatButtonModule
@@ -25,7 +27,8 @@ export class TaskItemComponent {
     @Output() edit = new EventEmitter<Task>();
     
     onCheckboxChange() {
-      this.toggle.emit({ ...this.task, completed: !this.task.completed });
+      console.log('Checkbox changed:', this.task);
+      this.toggle.emit(this.task);
     }
     
     onEnterPress() {
