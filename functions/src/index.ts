@@ -12,7 +12,7 @@ initializeApp();
 const server = express();
 
 const allowedOrigins = [
-  // 'http://localhost:4200',        // Desarrollo local
+  // 'http://localhost:4200',        // Desarrollo local 
   'https://atom-challenge-tasks.web.app',        // Producción real
 ];
 

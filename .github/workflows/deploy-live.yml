@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'  # Only trigger on changes in the src directory
 
 jobs:
   deploy:
