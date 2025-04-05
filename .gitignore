@@ -1,0 +1,35 @@
+# Node modules (frontend y backend)
+node_modules/
+functions/node_modules/
+
+# Angular build output
+dist/
+.angular/
+
+# Firebase Functions compiled output
+functions/lib/
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+
+# Secrets
+.env
+functions/.env
+
+# Testing
+coverage/
+functions/coverage/
+
+# IDEs y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Firebase emulator state (opcional)
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

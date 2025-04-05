@@ -1,0 +1,34 @@
+<div
+  tabindex="0"
+  role="button"
+  [attr.aria-pressed]="task.completed"
+  [attr.aria-label]="'Tarea: ' + task.title + '. Estado: ' + (task.completed ? 'Completada' : 'Pendiente')"
+  (keydown.enter)="onEnterPress()"
+  class="p-3 rounded hover:bg-gray-100 focus:outline-none focus:ring focus:ring-primary-300 flex items-center justify-between gap-4"
+>
+
+  <!-- Checkbox -->
+  <mat-checkbox
+    [checked]="task.completed"
+    (change)="onCheckboxChange()"
+    (click)="$event.stopPropagation()"
+    aria-label="Marcar como completada"
+  ></mat-checkbox>
+
+  <!-- Contenido: título, descripción, fecha -->
+  <div class="flex-1 overflow-hidden">
+    <p class="font-medium truncate" [class.line-through]="task.completed">{{ task.title }}</p>
+    <p class="text-sm text-gray-500 truncate">{{ task.description }}</p>
+    <p class="text-xs text-gray-400">{{ task.createdAt | date: 'short' }}</p>
+  </div>
+
+  <!-- Botones de acción -->
+  <div class="flex-shrink-0 flex gap-1">
+    <button mat-icon-button color="primary" (click)="edit.emit(task)" aria-label="Editar tarea">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="remove.emit(task)" aria-label="Eliminar tarea">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

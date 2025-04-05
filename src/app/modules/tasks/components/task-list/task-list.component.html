@@ -1,0 +1,10 @@
+<div class="space-y-2">
+  @for (task of tasks; track task.id) {
+      <app-task-item
+        [task]="task"
+        (toggle)="toggle.emit(task)"
+        (remove)="remove.emit(task)"
+        (edit)="edit.emit(task)"
+      ></app-task-item>
+  }
+</div>
