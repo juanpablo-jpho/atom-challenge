@@ -13,7 +13,7 @@ const server = express();
 
 const allowedOrigins = [
   // 'http://localhost:4200',        // Desarrollo local
-  'https://app.miapp.com',        // Producción real
+  'https://atom-challenge-tasks.web.app',        // Producción real
 ];
 
 const bootstrap = async () => {
