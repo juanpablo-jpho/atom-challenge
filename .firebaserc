@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "fimlmdonaciones"
-  }
+  },
+  "targets": {
+    "fimlmdonaciones": {
+      "hosting": {
+        "atom": [
+          "atom-challenge-tasks"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
