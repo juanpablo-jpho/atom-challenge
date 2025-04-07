@@ -1,4 +1,4 @@
-# ⚡ Atom Challenge - Fullstack App (Angular + NestJS + Firebase)
+# ⚡ Atom Challenge - Fullstack App (Angular + NestJS (Express y Typescript) + Firebase)
 
 Este es un proyecto fullstack que permite a los usuarios gestionar tareas personales de forma segura, con autenticación por token personalizada, backend serverless con NestJS sobre Firebase Functions, y frontend responsivo usando Angular + Angular Material + TailwindCSS.
 
@@ -14,7 +14,7 @@ Este es un proyecto fullstack que permite a los usuarios gestionar tareas person
 - TypeScript
 
 ### 🧰 Backend
-- NestJS
+- NestJS ((Express y Typescript))
 - Firebase Functions (v2 HTTPS)
 - Firestore
 - JSON Web Tokens (JWT)
