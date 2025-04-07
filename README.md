@@ -4,6 +4,24 @@ Este es un proyecto fullstack que permite a los usuarios gestionar tareas person
 
 ---
 
+¡Claro que sí, Juan Pablo! Aquí tienes un bloque de texto para agregar en tu README.md, bien claro y profesional:
+
+⸻
+
+## 🌐 Demo en producción
+
+Puedes ver la aplicación funcionando en producción en el siguiente enlace:
+
+🔗 https://atom-challenge-tasks.web.app
+
+Esta es la versión final desplegada del proyecto:
+	•	🧩 Frontend: Aplicación Angular desplegada en Firebase Hosting
+	•	🔥 Backend: API REST construida con NestJS y alojada en Firebase Cloud Functions
+	•	✅ Seguridad basada en token JWT generado a partir del correo electrónico del usuario
+	•	☁️ Comunicación segura entre frontend y backend mediante HTTPS y reglas de CORS
+
+⸻
+
 ## 🧱 Tecnologías utilizadas
 
 ### 🖥️ Frontend
