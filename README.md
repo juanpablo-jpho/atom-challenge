@@ -134,6 +134,23 @@ Para producción: modifica environment.prod.ts.
 npm run start
 
 ```
+
+⚙️ Scripts de Build Optimizados
+
+El proyecto está configurado con scripts optimizados para producción, incluyendo:
+- ✅ Tree shaking: Eliminación automática de código no utilizado durante el build (--configuration=production)
+- ✅ Minificación y Uglify: Código JavaScript reducido para mejorar el rendimiento en carga
+- ✅ Compresión y hashing de assets: Archivos estáticos con nombres únicos para cacheo eficiente
+- ✅ Lazy loading de rutas en Angular para mejorar el tiempo de carga inicial
+
+🛠️ Comando para generar el build de producción:
+
+```bash
+npm run build -- --configuration=production
+
+# El resultado se genera en www/browser y es el que se despliega en Firebase Hosting.
+```
+
 #### Backend
 
 ```bash
