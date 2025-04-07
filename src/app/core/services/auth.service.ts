@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-
 const API_URL = `${environment.apiUrl}/users`;
 
 @Injectable({ providedIn: 'root' })

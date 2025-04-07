@@ -60,29 +60,32 @@ npm install
 cd functions
 npm install
 
+```
+---
 
-
-⸻
-
-▶️ Ejecutar en desarrollo
+### ▶️ Ejecutar en desarrollo
 
 🖥️ Frontend (Angular)
 
+```bash
+
 npm run start
 
-Se abrirá en: http://localhost:4200
+# Se abrirá en: http://localhost:4200
 
-🔥 Backend (Firebase Functions + NestJS)
+# 🔥 Backend (Firebase Functions + NestJS)
 
 cd functions
 npm run build
 firebase emulators:start
 
-API base: http://localhost:5001/YOUR_PROJECT_ID/us-central1/api
+# API base: http://localhost:5001/YOUR_PROJECT_ID/us-central1/api
+
+```
 
 ⸻
 
-🔒 Variables de entorno
+### 🔒 Variables de entorno
 
 🔐 Backend - functions/.env
 
@@ -103,36 +106,42 @@ Para producción: modifica environment.prod.ts.
 
 ⸻
 
-🛠️ Scripts útiles
+### 🛠️ Scripts útiles
 
 🔧 Desarrollo
 
-# Angular
+#### Angular
+```bash
+
 npm run start
 
-# Backend
+```
+#### Backend
+
+```bash
 cd functions
 npm run build
 firebase emulators:start
+```
 
 🚀 Despliegue a Firebase
 
+```bash
 cd functions
 npm run build
 firebase deploy --only functions
-
-
+```
 
 ⸻
 
-🔐 Seguridad
+## 🔐 Seguridad
 	•	Todos los endpoints protegidos por tokens JWT
 	•	Los tokens son generados con JWT_SECRET y deben ser almacenados con cuidado
 	•	El backend solo permite acceso a tareas del usuario autenticado
 
 ⸻
 
-📦 Funcionalidades
+## 📦 Funcionalidades
 	•	Login con correo electrónico (sin contraseña)
 	•	Generación segura de token
 	•	Listar tareas propias
@@ -144,7 +153,73 @@ firebase deploy --only functions
 
 ⸻
 
-📌 Licencia
+
+## ✅ 🧪 Pruebas automatizadas
+
+### 🔹 Frontend (Angular)
+
+Desde la raíz del proyecto
+```bash
+
+npm run test
+
+```
+
+	•	Usa Karma + Jasmine
+	•	Pruebas unitarias para servicios (AuthService, TaskService), páginas (LoginPage, TasksPage)
+	•	Mockeos de servicios y uso de NoopAnimationsModule y HttpClientTestingModule
+
+### 🔹 Backend (NestJS)
+
+```bash
+cd functions
+npm run test
+
+```
+
+	•	Usa Jest
+	•	Pruebas unitarias siguiendo DDD (servicios, entidades, repositorios)
+	•	Pruebas con mocks para Firestore, JwtService, y repositorios abstractos
+
+⸻
+
+## ⚙️ CI/CD con GitHub Actions
+
+El repositorio está configurado para desplegar automáticamente:
+
+🚀 Frontend
+	•	Cuando se hace push a main o PR a main que modifique /src
+	•	Action: deploy-live.yml
+	•	Se despliega a Firebase Hosting, usando firebase.json con target atom
+
+🔥 Backend
+	•	Cuando se hace push a main que modifique la carpeta /functions
+	•	Action: deploy-backend.yml
+	•	Se despliega con firebase deploy --only functions:api
+	•	Usa secret FIREBASE_SERVICE_ACCOUNT para autenticación con Google Cloud
+
+⸻
+
+## 🧾 Documentación adicional de configuración
+
+🔑 Secrets & Entorno
+	•	Variables sensibles se guardan en Firebase como secrets seguros
+	•	Se usa defineSecret('JWT_SECRET') en el backend
+	•	También puede usarse archivo .env local para desarrollo (functions/.env)
+
+📁 Organización de carpetas
+	•	Frontend: Angular standalone modules, componentes accesibles y lazy-loaded
+	•	Backend: NestJS modular, con DDD (Domain, Application, Infrastructure)
+	•	repositorios, entidades, factories, y casos de uso
+
+🛡️ Seguridad
+	•	Autenticación basada en email → token JWT con ID y email del usuario
+	•	Middleware que valida y extrae el usuario del token en cada request
+	•	Las tareas son accesibles solo por el usuario que las creó
+
+⸻
+
+## 📌 Licencia
 
 MIT - Hecho con 💙 por Juan Pablo Hurtado
 

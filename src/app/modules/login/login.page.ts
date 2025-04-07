@@ -8,8 +8,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from '../../shared/services/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    ConfirmationDialogComponent
+    MatButtonModule
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss'
@@ -34,53 +33,47 @@ export class LoginPage {
     constructor(
       private fb: FormBuilder,
       private router: Router,
-      private authService: AuthService
+      private authService: AuthService,
+      private dialogService: DialogService
     ) {}
 
-    onSubmit() {
+    async onSubmit() {
       if (this.form.invalid) return;
     
       const email = this.form.value.email!;
-      this.authService.checkUserExists(email).then((exists) => {
-        if (exists) {
-          this.login(email);
-        } else {
-          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-            data: {
-              type: 'confirm',
-              title: 'Usuario no encontrado',
-              message: `¿Deseas crear una cuenta con el correo "${email}"?`,
-            },
-          });
     
-          dialogRef.afterClosed().subscribe((confirmed) => {
-            if (confirmed) {
-              this.login(email); // también crea y guarda token
-            }
-          });
+      try {
+        const exists = await this.authService.checkUserExists(email);
+    
+        if (exists) {
+          await this.login(email);
+        } else {
+          const confirmed = await this.dialogService.confirm(
+            'Usuario no encontrado',
+            `¿Deseas crear una cuenta con el correo "${email}"?`
+          );
+    
+          if (confirmed) {
+            await this.login(email);
+          }
         }
-      }).catch(() => {
-        this.dialog.open(ConfirmationDialogComponent, {
-          data: {
-            type: 'ok',
-            title: 'Error',
-            message: 'No se pudo validar el correo. Intenta más tarde.',
-          },
-        });
-      });
+      } catch (err) {
+        await this.dialogService.alert(
+          'Error',
+          'No se pudo validar el correo. Intenta más tarde.'
+        );
+      }
     }
     
-    private login(email: string) {
-      this.authService.login(email).then(() => {
+    private async login(email: string) {
+      try {
+        await this.authService.login(email);
         this.router.navigate(['/tasks']);
-      }).catch(() => {
-        this.dialog.open(ConfirmationDialogComponent, {
-          data: {
-            type: 'ok',
-            title: 'Error',
-            message: 'Hubo un error al iniciar sesión.',
-          },
-        });
-      });
+      } catch (err) {
+        await this.dialogService.alert(
+          'Error',
+          'Hubo un error al iniciar sesión.'
+        );
+      }
     }
 }

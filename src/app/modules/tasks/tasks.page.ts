@@ -12,7 +12,7 @@ import { Task } from '../../core/models/task.model';
 import { TaskService } from '../../core/services/task.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { DialogService } from '../../shared/services/dialog.service';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -38,7 +38,8 @@ export class TasksPage {
 
   constructor(private taskService: TaskService, 
               private router: Router,
-                  private authService: AuthService) {}
+              private dialogService: DialogService,
+              private authService: AuthService) {}
 
   async ngOnInit() {
     this.taskService.getTasks().subscribe((tasks) => {
@@ -56,21 +57,18 @@ export class TasksPage {
   }
 
   async deleteTask(task: Task) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        title: 'Eliminar tarea',
-        message: `¿Estás seguro que deseas eliminar la tarea "${task.title}"?`,
-        type: 'confirm',
-      },
-    });
+
+    const confirmed = await this.dialogService.confirm(
+      'Eliminar tarea',
+      `¿Estás seguro que deseas eliminar la tarea "${task.title}"?`,
+    );
   
-    dialogRef.afterClosed().subscribe(async (confirmed) => {
-      if (confirmed) {
-        this.taskService.deleteTask(task.id!).subscribe(() => {
-          this.tasks = this.tasks.filter((t) => t.id !== task.id);
-        });
-      }
-    });
+    if (confirmed) {
+      this.taskService.deleteTask(task.id!).subscribe(() => {
+        this.tasks = this.tasks.filter((t) => t.id !== task.id);
+      });
+    }
+    
   }
 
   async openNewTaskDialog() {
