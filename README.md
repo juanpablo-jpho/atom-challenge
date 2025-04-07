@@ -23,7 +23,7 @@ Este es un proyecto fullstack que permite a los usuarios gestionar tareas person
 ---
 
 ## 📁 Estructura del proyecto
-
+```txt
 atom-challenge/
 ├── functions/                # Backend (NestJS dentro de Firebase Functions)
 │   ├── src/
@@ -36,7 +36,7 @@ atom-challenge/
 ├── angular.json
 ├── README.md
 └── …
-
+```
 ---
 
 ## 🚀 Cómo ejecutar el proyecto
